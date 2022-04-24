@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<!-- Template from Soma: https://github.com/jsoma/ai2html-walkthroughs/blob/main/layers-scrollytelling/scrollytelling-incomplete/template.html -->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="favicon.ico?" type="image/x-icon" />
+	<title>Rise or Fall - predicting the popularity of musical artists</title>
+	<base target="_blank">
+
+	<meta property="og:title" content="Rise of Fall">
+	<meta property="og:description" content="Predicting the popularity of music artists">
+	<meta property="og:type" content="article">
+	<meta property="og:image" content="https://github.com/ilenapeng/ilenapeng.github.io/blob/main/nyc-languages/chart1.png?raw=true">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:creator" content="tazbiafatima">
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;700&display=swap');
+
+      body{font-family: 'Lato', sans-serif;}
+
+      /* scrolly styling */
+
+      #scrolly {
+        position: relative;
+        padding: 1rem;
+      }
+
+      .scrolly-overlay {
+        position: relative;
+        padding: 0;
+        max-width: 35rem;
+        margin: 0 auto;
+      }
+
+      .sticky-thing {
+        position: -webkit-sticky;
+        position: sticky;
+        left: 0;
+        width: 100%;
+        margin: 0;
+        z-index: 0;
+        top: 0;
+        height: 100vh;
+        /* Center everything inside */
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .step {
+        margin: 0 auto 2rem auto;
+        margin-bottom: 25rem;
+        background-color: #eee;
+        background-color: #fff;
+        color: black;
+      }
+
+      .step p {
+        text-align: left;
+        padding: 1rem;
+        font-size: 1.25rem;
+      }
+
+	  p {font-size: 1.25rem;}
+	  a {color:#3E8571}
+	  img{max-width:80%; padding-top: 3em; margin: auto;}
+
+    .hidden { visibility: hidden; }
+
+    /* styles for my images */
+		.child {
+      position: absolute;
+      top: 0;
+      display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+
+	  .container{max-width:60%; margin:auto;}
+	  @media (max-width: 800px) {.container{max-width:95%}}
+
+      /* When it's less than 800 pixels wide, do normal scrollytelling */
+      @media only screen and (min-width: 800px) {
+
+        #scrolly.side-by-side {
+          display: flex;
+          max-width:80%;
+          margin: auto;
+          }
+
+        #scrolly.side-by-side > div {
+          flex-basis: 0;
+          flex-grow: 1;
+          flex-shrink: 1;
+          padding: 0.75em;
+        }
+
+        #scrolly.side-by-side .scrolly-overlay {
+          margin-top: 70vh;
+          order: 0;
+          /* Change these to adjust sizing options */
+          min-width: 15rem;
+          max-width: 20rem;
+        }
+
+        #scrolly.side-by-side .sticky-thing {
+          order: 1;
+          flex-grow: 2;
+        }
+
+
+      }
+    </style>
+	<script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/scrollama/3.0.4/scrollama.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.3.0/d3.min.js"></script>
+
+  </head>
+
+  <body>
+  <div class="container">
+  <h1><span style="color:#c9c9c9">Rise or Fall - predicting the popularity of musical artists</span></h1>
+  <h2>Introduction goes here</h2>
+
+  <p>
+  </p>
+
+  <p>
+  </p>
+
+  <p>
+  </p>
+
+  <p>
+	line
+  </p>
+
+  </div>
+
+      <section id="scrolly" class="side-by-side">
+        <div class="sticky-thing">
+				<div class="child child-1">
+					<!-- <h3 id="text1">Brooklyn is the only borough where the number of households speaking other languages declined</h3> -->
+					<img id="img1" src="chart1.png" alt="Map of how the number of non-English language speakers changed between 2005 and 2019. Brooklyn was the only borough where the number of language speakers dropped.">
+				</div>
+
+				<div class="child child-2">
+					<!-- <h3 id="text2">Households speaking non-English languages in Brooklyn dropped between 2005 and 2019</h3> -->
+					<img id="img2" src="chart2.png" alt="Households speaking ">
+				</div>
+
+				<div class="child child-2">
+					<!-- <h3 id="text3">Brooklyn had 35K fewer people speaking Spanish at home in 2019 than 2005</h3> -->
+			  		<img id="img3" src="chart3.png" alt="">
+				</div>
+
+			  </div>
+
+        </div>
+
+        <div class="scrolly-overlay" style="padding-left:10%">
+          <div class="step" id="step-zero">
+            <p>First Insight goes here  </p>
+          </div>
+          <div class="step" id="step-one">
+            <p> Second insight goes here</p>
+          </div>
+          <div class="step" id="step-two">
+            <p> Third insight or prediction goes here</p>
+          </div>
+          <div class="step" id="step-three">
+            <p>Prediction or prediction explanation goes here</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="container">
+		<p>Methodology and explanation goes here </p>
+
+
+      <p style="font-size:1em; padding-bottom:3em;"><em>
+        Methodological notes:
+        Data was not available for
+        All data and code are available on {link here} GitHub</a>.
+      </em></p>
+    </div>
+
+    <script>
+
+      /* Scrollytelling code goes under here */
+      // there's a step zero too but I'm opting to just start because it would briefly show all the layers before hitting step zero
+      // I'm using step zero just for scrolling up purposes
+
+      // ON START, STEP 1:
+
+	d3.select('#img1').classed('hidden',false)
+	// d3.select('#text1').classed('hidden',false)
+	d3.select('#img2').classed('hidden',true)
+	// d3.select('#text2').classed('hidden',true)
+	d3.select('#img3').classed('hidden',true)
+	// d3.select('#text3').classed('hidden',true)
+
+	d3.select("#step-zero").on('stepin', function(e){
+		// Same as step one
+		d3.select('#img1').classed('hidden',false)
+		// d3.select('#text1').classed('hidden',false)
+		// Remove step 2 on scroll up
+		d3.select('#img2').classed('hidden',true)
+		// d3.select('#text2').classed('hidden',true)
+	})
+
+	d3.select("#step-one").on('stepin', function(e){
+		// Remove step 1
+		d3.select('#img1').classed('hidden',true)
+		// d3.select('#text1').classed('hidden',true)
+		// Make step 2 appear
+		d3.select('#img2').classed('hidden',false)
+		// d3.select('#text2').classed('hidden',false)
+		// Remove step 3 on scroll up
+		d3.select('#img3').classed('hidden',true)
+		// d3.select('#text3').classed('hidden',true)
+	})
+
+	d3.select("#step-two").on('stepin', function(e){
+		// Remove step 2
+		d3.select('#img2').classed('hidden',true)
+		// d3.select('#text2').classed('hidden',true)
+		// Make step 3 appear
+		d3.select('#img3').classed('hidden',false)
+		// d3.select('#text3').classed('hidden',false)
+	})
+
+    </script>
+
+<script>
+    const scroller = scrollama();
+
+	scroller
+		.setup({
+			step: "#scrolly .scrolly-overlay .step",
+			offset: 0.5,
+			debug: false
+		})
+		.onStepEnter(function({ element, index, direction}) {
+			const event = new CustomEvent('stepin', { detail: { direction: direction } })
+			element.dispatchEvent(event);
+		})
+		.onStepExit(function({ element, index, direction }) {
+			const event = new CustomEvent('stepout', { detail: { direction: direction } })
+			element.dispatchEvent(event);
+		});
+
+	window.addEventListener("resize", scroller.resize);
+    </script>
+
+
+   <!-- ai2html resizer script -->
+
+<script type="text/javascript">
+  (function() {
+      // only want one resizer on the page
+      if (document.documentElement.className.indexOf("g-resizer-v3-init") > -1) return;
+      document.documentElement.className += " g-resizer-v3-init";
+      // require IE9+
+      if (!("querySelector" in document)) return;
+      function resizer() {
+          var elements = Array.prototype.slice.call(document.querySelectorAll(".g-artboard[data-min-width]")),
+              widthById = {};
+          elements.forEach(function(el) {
+              var parent = el.parentNode,
+                  width = widthById[parent.id] || parent.getBoundingClientRect().width,
+                  minwidth = el.getAttribute("data-min-width"),
+                  maxwidth = el.getAttribute("data-max-width");
+              widthById[parent.id] = width;
+
+              if (+minwidth <= width && (+maxwidth >= width || maxwidth === null)) {
+                  el.style.display = "block";
+              } else {
+                  el.style.display = "none";
+              }
+          });
+          try {
+              if (window.parent && window.parent.$) {
+                  window.parent.$("body").trigger("resizedcontent", [window]);
+              }
+              if (window.require) {
+                  require(['foundation/main'], function() {
+                      require(['shared/interactive/instances/app-communicator'], function(AppCommunicator) {
+                          AppCommunicator.triggerResize();
+                      });
+                  });
+              }
+          } catch(e) { console.log(e); }
+      }
+
+      document.addEventListener('DOMContentLoaded', resizer);
+      // feel free to replace throttle with _.throttle, if available
+      window.addEventListener('resize', throttle(resizer, 200));
+
+      function throttle(func, wait) {
+          // from underscore.js
+          var _now = Date.now || function() { return new Date().getTime(); },
+              context, args, result, timeout = null, previous = 0;
+          var later = function() {
+              previous = _now();
+              timeout = null;
+              result = func.apply(context, args);
+              if (!timeout) context = args = null;
+          };
+          return function() {
+              var now = _now(), remaining = wait - (now - previous);
+              context = this;
+              args = arguments;
+              if (remaining <= 0 || remaining > wait) {
+                  if (timeout) {
+                      clearTimeout(timeout);
+                      timeout = null;
+                  }
+                  previous = now;
+                  result = func.apply(context, args);
+                  if (!timeout) context = args = null;
+              } else if (!timeout && options.trailing !== false) {
+                  timeout = setTimeout(later, remaining);
+              }
+              return result;
+          };
+      }
+
+
+  })();
+</script>
+
+  </body>
+</html>
